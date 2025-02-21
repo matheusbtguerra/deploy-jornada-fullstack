@@ -5,12 +5,9 @@ import { useState } from "react";
 const SongList = ({ songsArray }) => {
   // const items = 5;
   const [items, setItems] = useState(5);
+  const [seeMore, setSeeMore] = useState("Ver mais");
 
-  // items = 10
-  // setItems(10)
-
-  // console.log(items);
-  // items +=  5
+  
 
   return (
     <div className="song-list">
@@ -23,12 +20,16 @@ const SongList = ({ songsArray }) => {
       <p
         className="song-list__see-more"
         onClick={() => {
-          setItems(items + 5);
-          // items += 5;
-          // console.log(items);
+          if (items === 5) {
+            setSeeMore("Ver menos");
+            setItems(20);
+          } else {
+            setSeeMore("Ver mais");
+            setItems(5);
+          }
         }}
       >
-        Ver mais
+        {seeMore}
       </p>
     </div>
   );
