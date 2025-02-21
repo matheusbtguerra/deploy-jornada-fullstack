@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCirclePlay,
@@ -7,7 +7,7 @@ import {
   faForwardStep,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 const formatTime = (timeInSeconds) => {
   const minutes = Math.floor(timeInSeconds / 60)
@@ -25,7 +25,7 @@ const timeInSeconds = (timeString) => {
   const minutes = Number(splitArray[0]);
   const seconds = Number(splitArray[1]);
 
-  return minutes + seconds * 60;
+  return seconds + minutes * 60;
 };
 
 const Player = ({
@@ -34,32 +34,40 @@ const Player = ({
   randomId2FromArtist,
   audio,
 }) => {
+  // const audioPlayer...
   const audioPlayer = useRef();
-  const [isPlaying, setIsPlaying] = useState(false);
   const progressBar = useRef();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(formatTime(0));
+  const durationInSeconds = timeInSeconds(duration);
 
+  // console.log(durationInSeconds);
+
+  // função
+  // console.log(audioPlayer.current.play());
   const playPause = () => {
     isPlaying ? audioPlayer.current.pause() : audioPlayer.current.play();
-    setIsPlaying(!isPlaying);
-  };
 
-  const [currentTime, setCurrentTime] = useState(formatTime(0));
+    setIsPlaying(!isPlaying);
+
+    // console.log(formatTime(audioPlayer.current.currentTime));
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (isPlaying) {
+      if (isPlaying)
         setCurrentTime(formatTime(audioPlayer.current.currentTime));
-        progressBar.current.style.setProperty(
-          "--_progress",
-          (audioPlayer.current.currentTime / durationInSeconds) * 100 + "%"
-        );
-      }
-    }, 1);
+
+      progressBar.current.style.setProperty(
+        "--_progress",
+        (audioPlayer.current.currentTime / durationInSeconds) * 100 + "%"
+      );
+    }, 1000);
 
     return () => clearInterval(intervalId);
   }, [isPlaying]);
 
-  const durationInSeconds = timeInSeconds(duration);
+  // setIsPlaying(false)
 
   return (
     <div className="player">
@@ -86,7 +94,7 @@ const Player = ({
           <div ref={progressBar} className="player__bar-progress"></div>
         </div>
 
-        <p>{`0${duration}`}</p>
+        <p>{duration}</p>
       </div>
 
       <audio ref={audioPlayer} src={audio}></audio>

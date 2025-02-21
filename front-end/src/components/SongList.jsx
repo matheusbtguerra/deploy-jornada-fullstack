@@ -1,21 +1,16 @@
-import React, { use } from "react";
+import React from "react";
 import SongItem from "./SongItem";
 import { useState } from "react";
 
 const SongList = ({ songsArray }) => {
+  // const items = 5;
   const [items, setItems] = useState(5);
 
-  const [seeMoreOrLessOption, setSeeMoreOrLessOption] = useState("Ver mais");
+  // items = 10
+  // setItems(10)
 
-  function seeMoreOrLessToogle() {
-    if (items === 5) {
-      setItems(10);
-      setSeeMoreOrLessOption("Ver menos");
-    } else {
-      setItems(5);
-      setSeeMoreOrLessOption("Ver mais");
-    }
-  }
+  // console.log(items);
+  // items +=  5
 
   return (
     <div className="song-list">
@@ -27,9 +22,13 @@ const SongList = ({ songsArray }) => {
 
       <p
         className="song-list__see-more"
-        onClick={seeMoreOrLessToogle}
+        onClick={() => {
+          setItems(items + 5);
+          // items += 5;
+          // console.log(items);
+        }}
       >
-        {seeMoreOrLessOption}
+        Ver mais
       </p>
     </div>
   );

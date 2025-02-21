@@ -1,22 +1,21 @@
 {
   "name": "deploy",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"npm install --prefix back-end && npm install --prefix front-end && npm run build --prefix front-end",
+    "build": "npm install --prefix back-end && npm install --prefix front-end && npm run build --prefix front-end",
     "start": "npm run start --prefix back-end"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matheusbtguerra/deploy-jornada-fullstack.git"
+    "url": "git+https://github.com/fullstackjornada/deploy-jornada-full-stack.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/matheusbtguerra/deploy-jornada-fullstack/issues"
+    "url": "https://github.com/fullstackjornada/deploy-jornada-full-stack/issues"
   },
-  "homepage": "https://github.com/matheusbtguerra/deploy-jornada-fullstack#readme"
+  "homepage": "https://github.com/fullstackjornada/deploy-jornada-full-stack#readme",
+  "description": ""
 }
